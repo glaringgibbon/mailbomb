@@ -1,0 +1,48 @@
+[project]
+name = "mailbomb"
+version = "0.1.0"
+description = "A B2B email marketing application."
+licence = { file = "LICENCE" }
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic (>=2.11.3,<3.0.0)",
+    "jinja2 (>=3.1.6,<4.0.0)",
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "sqlalchemy (>=2.0.40,<3.0.0)",
+    "aiosmtplib (>=4.0.0,<5.0.0)",
+    "typer (>=0.15.2,<0.16.0)",
+    "python-multipart (>=0.0.20,<0.0.21)",
+    "loguru (>=0.7.2,<0.8.0)",
+]
+
+
+[project.optional-dependencies]
+analytics = ["pandas (>=2.2.3,<3.0.0)"]
+dev = [
+  "pytest>=7.4.0",
+  "pytest-asyncio (>=0.26.0,<0.27.0)", 
+  "pytest-cov (>=6.1.1,<7.0.0)", 
+  "mypy (>=1.15.0,<2.0.0)", 
+  "black (>=25.1.0,<26.0.0)", 
+  "isort (>=6.0.1,<7.0.0)", 
+  "factory-boy (>=3.3.3,<4.0.0)",
+  "redis (>=5.0.0,<6.0.0)"
+]
+
+[project.scripts]
+mailbomb = "mailbomb.api.cli:app"
+worker = "mailbomb.scripts.worker:main"
+
+[tool.poetry]
+packages = [{ include = "mailbomb" }]
+
+[tool.poetry.group.dev.dependencies]
+pytest-mock = "^3.12.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
